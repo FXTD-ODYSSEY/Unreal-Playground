@@ -1,0 +1,3 @@
+[submodule "Plugins/PyToolkit"]
+	path = Plugins/PyToolkit
+	url = git@github.com:FXTD-ODYSSEY/Unreal-PyToolkit.git
