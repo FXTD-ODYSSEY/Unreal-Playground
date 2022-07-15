@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"name": "Unreal_Playground",
+			"path": "."
+		},
+		{
+			"name": "UE4",
+			"path": "D:\\EpicGames\\UE_4.27"
+		}
+	],
+	"settings": {
+		"typescript.tsc.autoDetect": "off"
+	},
+	"extensions": {
+		"recommendations": [
+			"ms-vscode.cpptools",
+			"ms-dotnettools.csharp"
+		]
+	}
+}
