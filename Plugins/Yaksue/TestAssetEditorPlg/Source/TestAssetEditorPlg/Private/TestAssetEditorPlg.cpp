@@ -1,8 +1,8 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
+#include "TestAssetEditorPlg.h"
 #include "AssetToolsModule.h"
 #include "YaksueTestAssetTypeActions.h"
-#include "TestAssetEditorPlg.h"
 
 #define LOCTEXT_NAMESPACE "FTestAssetEditorPlgModule"
 
@@ -10,13 +10,7 @@ void FTestAssetEditorPlgModule::StartupModule()
 {
 	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
 	IAssetTools &AssetTools = FModuleManager::LoadModuleChecked<FAssetToolsModule>("AssetTools").Get();
-	// AssetCategory = AssetTools.RegisterAdvancedAssetCategory(FName(TEXT("MyDefined")), FText::FromName(TEXT("MyDefined")));
-	// AssetCategory = AssetTools.RegisterAdvancedAssetCategory(FName(TEXT("Custom Asset")), LOCTEXT("CustomAsset", "Custom Asset"));
-	// AssetTools.RegisterAssetTypeActions(MakeShareable(new FYaksueTestAssetTypeActions()));
-
-    EAssetTypeCategories::Type AssetCategory = AssetTools.RegisterAdvancedAssetCategory(FName(TEXT("Avatar")), LOCTEXT("AvatarAssetCategory", "Avatar"));
-	TSharedPtr<FYaksueTestAssetTypeActions> AssetTypeAction = MakeShareable(new FYaksueTestAssetTypeActions(AssetCategory));
-	AssetTools.RegisterAssetTypeActions(AssetTypeAction.ToSharedRef());
+	AssetTools.RegisterAssetTypeActions(MakeShareable(new FYaksueTestAssetTypeActions()));
 }
 
 void FTestAssetEditorPlgModule::ShutdownModule()

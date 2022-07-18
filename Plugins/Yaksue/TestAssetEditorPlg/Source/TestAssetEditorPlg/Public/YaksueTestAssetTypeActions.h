@@ -7,7 +7,7 @@
 class FYaksueTestAssetTypeActions : public FAssetTypeActions_Base
 {
 public:
-	FYaksueTestAssetTypeActions(EAssetTypeCategories::Type InAssetCategory);
+	FYaksueTestAssetTypeActions();
 
 	// Asset的名字
 	virtual FText GetName() const override { return FText::FromName(TEXT("YaksueTestAsset")); }

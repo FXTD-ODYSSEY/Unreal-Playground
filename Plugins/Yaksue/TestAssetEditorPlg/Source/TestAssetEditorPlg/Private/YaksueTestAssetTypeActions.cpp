@@ -2,9 +2,11 @@
 
 #define LOCTEXT_NAMESPACE "YaksueTest"
 
-FYaksueTestAssetTypeActions::FYaksueTestAssetTypeActions(EAssetTypeCategories::Type InAssetCategory)
+FYaksueTestAssetTypeActions::FYaksueTestAssetTypeActions()
 {
-	AssetCategory = InAssetCategory;
+	// NOTE: 注册新的分类
+	IAssetTools &AssetTools = FModuleManager::LoadModuleChecked<FAssetToolsModule>("AssetTools").Get();
+    AssetCategory = AssetTools.RegisterAdvancedAssetCategory(FName(TEXT("Custom Assets")), LOCTEXT("CustomAssetCategory", "Custom Assets"));
 }
 
 uint32 FYaksueTestAssetTypeActions::GetCategories()

@@ -19,9 +19,4 @@ UObject* UYaksueTestAssetFactory::FactoryCreateNew(UClass* Class, UObject* InPar
 	return CreatedAsset;
 }
 
-uint32 UYaksueTestAssetFactory::GetMenuCategories() const
-{
-	return EAssetTypeCategories::Misc;
-}
-
 #undef LOCTEXT_NAMESPACE
