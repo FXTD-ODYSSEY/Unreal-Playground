@@ -68,17 +68,17 @@ void FTestLayoutWindowModule::StartupModule()
 
 	//InnerTab2的内容：
 	FGlobalTabmanager::Get()->RegisterNomadTabSpawner(InnerTabName2, FOnSpawnTab::CreateLambda([](const FSpawnTabArgs& SpawnTabArgs)
-		{
-			return
-				SNew(SDockTab)
-				.TabRole(ETabRole::NomadTab)
-				[
-					SNew(STextBlock)
-					.Text(FText::FromString("InnerTab2"))
-				];
-		}))
-		.SetDisplayName(LOCTEXT("InnerTab2", "InnerTab2"))
-			.SetMenuType(ETabSpawnerMenuType::Hidden);
+	{
+		return
+			SNew(SDockTab)
+			.TabRole(ETabRole::NomadTab)
+			[
+				SNew(STextBlock)
+				.Text(FText::FromString("InnerTab2"))
+			];
+	}))
+	.SetDisplayName(LOCTEXT("InnerTab2", "InnerTab2"))
+	.SetMenuType(ETabSpawnerMenuType::Hidden);
 }
 
 void FTestLayoutWindowModule::ShutdownModule()

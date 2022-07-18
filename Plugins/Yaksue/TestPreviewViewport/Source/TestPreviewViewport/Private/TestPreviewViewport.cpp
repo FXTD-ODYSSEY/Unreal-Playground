@@ -1,8 +1,8 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
+#include "TestPreviewViewport.h"
 #include "STestLevelEditorViewport.h"
 #include "STestEditorViewport.h"
-#include "TestPreviewViewport.h"
 #include "TestPreviewViewportStyle.h"
 #include "TestPreviewViewportCommands.h"
 #include "LevelEditor.h"
