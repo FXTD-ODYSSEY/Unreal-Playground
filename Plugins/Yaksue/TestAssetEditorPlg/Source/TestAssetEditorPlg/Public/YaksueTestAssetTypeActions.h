@@ -1,10 +1,13 @@
 #pragma once
 
 #include "AssetTypeActions_Base.h"
+#include "YaksueTestAssetToolkit.h"
 
 class FYaksueTestAssetTypeActions : public FAssetTypeActions_Base
 {
 public:
+	FYaksueTestAssetTypeActions();
+	EAssetTypeCategories::Type AvatarAssetCategory;
 	//Asset的名字
 	virtual FText GetName() const override;
 	//Asset图标的颜色
