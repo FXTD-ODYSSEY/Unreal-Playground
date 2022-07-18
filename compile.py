@@ -18,6 +18,9 @@ import glob
 import subprocess
 import logging
 import argparse
+import signal
+
+signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 logging.basicConfig(level=logging.INFO)
 
@@ -48,9 +51,12 @@ def get_ue_location():
                 return uproject, ue_location
 
 
-def run_command(command):
+def run_command(command, callback=None, *args, **kwargs):
     logging.info(command)
-    subprocess.run(command)
+    if not callback:
+        subprocess.run(command)
+    else:
+        callback(command, *args, **kwargs)
 
 
 def main():
@@ -77,6 +83,18 @@ def main():
     args = parser.parse_args()
     action = args.action.lower()
 
+    compile_command = " ".join(
+        [
+            UBT,
+            "Development",
+            "Win64",
+            '-Project="{proj}"'.format(proj=uproject),
+            "-TargetType=Editor",
+            "-Progress",
+            "-NoEngineChanges",
+        ]
+    )
+
     if action in ("generate_project", "gp"):
         run_command(
             " ".join(
@@ -90,31 +108,15 @@ def main():
                 ]
             )
         )
-    if action in ("launch_project", "lp"):
+    elif action in ("launch_project", "lp"):
         run_command(
-            " ".join(
-                [
-                    UE,
-                    uproject,
-                    "-skipcompile",
-                ]
-            )
+            " ".join([UE, uproject, "-skipcompile"]),
+            subprocess.Popen,
         )
+    elif action in ("compile_project", "cp"):
+        run_command(compile_command)
     else:
-        # NOTES(timmyliang): compile project
-        run_command(
-            " ".join(
-                [
-                    UBT,
-                    "Development",
-                    "Win64",
-                    '-Project="{proj}"'.format(proj=uproject),
-                    "-TargetType=Editor",
-                    "-Progress",
-                    "-NoEngineChanges",
-                ]
-            )
-        )
+        run_command(compile_command)
 
 
 # D:/EpicGames/UE_4.27/Engine/Binaries/DotNET/UnrealBuildTool.exe Development Win64 -Project="D:/EpicGames/Unreal_Playground/Unreal_Playground.uproject" -TargetType=Editor -Progress -NoEngineChanges -NoHotReloadFromIDE
