@@ -48,7 +48,7 @@ def get_ue_location():
             app_name = app.get("ArtifactId")
             version = app_name.split("_")[-1]
             if version == project_version:
-                return uproject, ue_location
+                return version, uproject, ue_location
 
 
 def run_command(command, callback=None, *args, **kwargs):
@@ -64,12 +64,13 @@ def main():
     if not collections:
         logging.error("No UE project or engine location found")
         return
-    uproject, ue_location = collections
-
-    UBT = os.path.join(
-        ue_location, "Engine", "Binaries", "DotNET", "UnrealBuildTool.exe"
-    )
-    UE = os.path.join(ue_location, "Engine", "Binaries", "Win64", "UE4Editor.exe")
+    version, uproject, ue_location = collections
+    is_ue5 = version.startswith("5")
+    build_tool = "UnrealBuildTool.exe"
+    build_tool = os.path.join("UnrealBuildTool", build_tool) if is_ue5 else build_tool
+    UBT = os.path.join(ue_location, "Engine", "Binaries", "DotNET", build_tool)
+    editor = "UnrealEditor.exe" if is_ue5 else "UE4Editor.exe"
+    UE = os.path.join(ue_location, "Engine", "Binaries", "Win64", editor)
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
